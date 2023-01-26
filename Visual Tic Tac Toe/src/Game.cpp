@@ -24,6 +24,7 @@ int Game::placePiece(int p_x, int p_y, char player, std::vector<Entity>& pieces)
     }
 
     if (board[y][x] == '-') {
+        turn++;
         board[y][x] = player;
         if (pos == 1) {
             x = 55;
@@ -71,7 +72,15 @@ int Game::placePiece(int p_x, int p_y, char player, std::vector<Entity>& pieces)
         }
 
         pieces.push_back(Entity(Vector2f(x, y), 64, 64, tex));
-        return checkWin(player);
+        int winner = checkWin(player);
+        if (winner == 0 && turn == 9)
+        {
+            return 3;
+        }
+        else
+        {
+            return winner;
+        }
     }
     else {
         return -1;

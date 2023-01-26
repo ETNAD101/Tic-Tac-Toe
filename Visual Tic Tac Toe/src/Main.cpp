@@ -83,23 +83,33 @@ void update()
     if (mouseDown) {
         SDL_GetMouseState(&mouseX, &mouseY);
         int res = g.placePiece(mouseX, mouseY, player, pieces);
-        if (res == 0) {
+        switch (res)
+        {
+        case 0:
             if (player == 'X') {
                 player = 'O';
             }
             else {
                 player = 'X';
             }
-        }
-        else if (res > 0) {
+            break;
+
+        case 1:
             end = true;
-            if (res == 1) {
-                text = Entity(Vector2f(300, 300), 300, 12, window.createText("Player 1 has won", font));
-            }
-            else {
-                text = Entity(Vector2f(300, 300), 300, 12, window.createText("Player 2 has won", font));
-            }
+            text = Entity(Vector2f(300, 300), 300, 12, window.createText("Player 1 has won", font));
+            break;
+
+        case 2:
+            end = true;
+            text = Entity(Vector2f(300, 300), 300, 12, window.createText("Player 2 has won", font));
+            break;
+
+        case 3:
+            end = true;
+            text = Entity(Vector2f(300, 300), 300, 12, window.createText("Tie", font));
+            break;
         }
+     
         mouseDown = false;
     }
 }

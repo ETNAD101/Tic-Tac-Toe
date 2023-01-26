@@ -20,7 +20,6 @@ private:
     SDL_Texture* xTex;
     SDL_Texture* oTex;
     int findPos(int x, int y);
-    int getCoords(int p_pos);
     char winPositions[8][3][3] = {
         {
             {'X','X','X'},
