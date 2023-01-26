@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Message.cpp" />
     <ClCompile Include="src\Entity.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\Main.cpp" />
@@ -30,6 +31,7 @@
     <ClInclude Include="include\Vector2f.h" />
     <ClInclude Include="include\RenderWindow.h" />
     <ClInclude Include="include\Settings.h" />
+    <ClInclude Include="include\Message.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

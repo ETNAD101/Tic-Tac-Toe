@@ -13,6 +13,7 @@ public:
     Entity(Vector2f p_pos, int p_w, int p_h, SDL_Texture* p_tex);
     Vector2f& getPos();
     SDL_Texture* getTex();
+    void setTex(SDL_Texture* p_tex);
     SDL_Rect getCurrentFrame();
     void setCurrentFrame(SDL_Rect p_rect);
     void setX(float p_x);

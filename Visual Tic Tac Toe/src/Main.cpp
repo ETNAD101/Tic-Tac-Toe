@@ -5,11 +5,12 @@
 #include <iostream>
 #include <vector>
 #include <cmath>
-#include "renderWindow.h"
-#include "vector2f.h"
-#include "entity.h"
-#include "game.h"
-#include "settings.h"
+#include "RenderWindow.h"
+#include "Vector2f.h"
+#include "Entity.h"
+#include "Message.h"
+#include "Game.h"
+#include "Settings.h"
 
 /**Delta time variables**/
 Uint64 NOW = SDL_GetPerformanceCounter();
@@ -31,8 +32,8 @@ std::vector<Entity> pieces;
 Game g = Game(window.loadTexture(X_PATH), window.loadTexture(O_PATH));
 Entity Game_Board = Entity(Vector2f(0, 0), 600, 600, window.loadTexture(BOARD_PATH));
 
-TTF_Font* font = window.loadFont(FONT_PATH, 12);
-Entity text = Entity(Vector2f(300, 300), 300, 12, window.createText("No Winner", font));
+TTF_Font* font = window.loadFont(FONT_PATH, 52);
+Message endMessage = Message(Vector2f(0, 0), "ERROR", font, window.getRenderer());
 
 void init()
 {
@@ -96,17 +97,17 @@ void update()
 
         case 1:
             end = true;
-            text = Entity(Vector2f(300, 300), 300, 12, window.createText("Player 1 has won", font));
+            endMessage.setMessage("Player 1 has won");
             break;
 
         case 2:
             end = true;
-            text = Entity(Vector2f(300, 300), 300, 12, window.createText("Player 2 has won", font));
+            endMessage.setMessage("Player 2 has won");
             break;
 
         case 3:
             end = true;
-            text = Entity(Vector2f(300, 300), 300, 12, window.createText("Tie", font));
+            endMessage.setMessage("Tie");
             break;
         }
      
@@ -127,7 +128,7 @@ void graphics()
         window.render(p);
     }
     if (end) {
-        window.render(text);
+        window.render(endMessage);
     }
 
     window.display();

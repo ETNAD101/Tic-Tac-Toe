@@ -25,6 +25,11 @@ SDL_Texture* Entity::getTex()
     return tex;
 }
 
+void Entity::setTex(SDL_Texture* p_tex)
+{
+    tex = p_tex;
+}
+
 SDL_Rect Entity::getCurrentFrame()
 {
     return currentFrame;

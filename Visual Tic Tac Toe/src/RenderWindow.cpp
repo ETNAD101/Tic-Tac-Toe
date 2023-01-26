@@ -45,15 +45,6 @@ TTF_Font* RenderWindow::loadFont(const char* p_fontPath, int p_size) {
     return font;
 }
 
-/**Creates a texture from the given text and font**/
-SDL_Texture* RenderWindow::createText(std::string p_text, TTF_Font* p_font) {
-    SDL_Surface* surfaceText = TTF_RenderText_Solid(p_font, p_text.c_str(), { 0, 0, 0 });
-    SDL_Texture* texture;
-    texture = SDL_CreateTextureFromSurface(renderer, surfaceText);
-    SDL_FreeSurface(surfaceText);
-    return texture;
-}
-
 void RenderWindow::cleanUp()
 {
     SDL_DestroyWindow(window);
@@ -82,6 +73,11 @@ void RenderWindow::render(Entity& p_e)
     dst.h = p_e.getCurrentFrame().h;
 
     SDL_RenderCopy(renderer, p_e.getTex(), &src, &dst);
+}
+
+SDL_Renderer* RenderWindow::getRenderer()
+{
+    return renderer;
 }
 
 /**Renders the renderer**/
