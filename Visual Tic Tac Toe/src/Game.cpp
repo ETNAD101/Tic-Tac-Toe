@@ -5,13 +5,13 @@
 #include "game.h"
 #include "entity.h"
 
-Game::Game(SDL_Texture* p_xTex, SDL_Texture* p_oTex)
-    :xTex(p_xTex), oTex(p_oTex)
+Game::Game(SDL_Texture* p_xTex, SDL_Texture* p_oTex, std::vector<Entity>* p_pieces)
+    :xTex(p_xTex), oTex(p_oTex), pieces(p_pieces)
 {
     clear();
 }
 
-int Game::placePiece(int p_x, int p_y, char player, std::vector<Entity>& pieces) {
+int Game::placePiece(int p_x, int p_y, char player) {
     int pos = findPos(p_x, p_y);
     int x = 0, y = 0;
 
@@ -71,7 +71,7 @@ int Game::placePiece(int p_x, int p_y, char player, std::vector<Entity>& pieces)
             tex = oTex;
         }
 
-        pieces.push_back(Entity(Vector2f(x, y), 64, 64, tex));
+        pieces->push_back(Entity(Vector2f(x, y), 64, 64, tex));
         int winner = checkWin(player);
         if (winner == 0 && turn == 9)
         {
@@ -114,6 +114,7 @@ int Game::checkWin(char p_player) {
 
 void Game::clear() {
     turn = 0;
+    pieces->clear();
     for (int x = 0; x < 3; x++) {
         for (int y = 0; y < 3; y++) {
             board[x][y] = '-';

@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Button.cpp" />
     <ClCompile Include="src\Message.cpp" />
     <ClCompile Include="src\Entity.cpp" />
     <ClCompile Include="src\Game.cpp" />
@@ -26,12 +27,21 @@
     <ClCompile Include="src\RenderWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\Button.h" />
     <ClInclude Include="include\Entity.h" />
     <ClInclude Include="include\Game.h" />
     <ClInclude Include="include\Vector2f.h" />
     <ClInclude Include="include\RenderWindow.h" />
     <ClInclude Include="include\Settings.h" />
     <ClInclude Include="include\Message.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\gfx\board.png" />
+    <Image Include="res\gfx\o.png" />
+    <Image Include="res\gfx\x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="res\fonts\Roboto-Light.ttf" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

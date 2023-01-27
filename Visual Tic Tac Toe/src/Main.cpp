@@ -9,6 +9,7 @@
 #include "Vector2f.h"
 #include "Entity.h"
 #include "Message.h"
+#include "Button.h"
 #include "Game.h"
 #include "Settings.h"
 
@@ -25,15 +26,17 @@ bool running = true;
 bool end = false;
 
 /**Creating Variables**/
+
 char player = 'X';
 bool mouseDown;
 int mouseX, mouseY;
 std::vector<Entity> pieces;
-Game g = Game(window.loadTexture(X_PATH), window.loadTexture(O_PATH));
+Game g = Game(window.loadTexture(X_PATH), window.loadTexture(O_PATH), &pieces);
 Entity Game_Board = Entity(Vector2f(0, 0), 600, 600, window.loadTexture(BOARD_PATH));
 
 TTF_Font* font = window.loadFont(FONT_PATH, 52);
 Message endMessage = Message(Vector2f(0, 0), "ERROR", font, window.getRenderer());
+Button clearButton = Button(Vector2f(100, 100), "Reset", font, window.getRenderer(), &mouseDown);
 
 void init()
 {
@@ -82,8 +85,18 @@ void update()
     deltaTime = (double)((NOW - LAST) * 1000 / (double)SDL_GetPerformanceFrequency());
 
     if (mouseDown) {
+
         SDL_GetMouseState(&mouseX, &mouseY);
-        int res = g.placePiece(mouseX, mouseY, player, pieces);
+
+        if (clearButton.pressed(mouseX, mouseY) && clearButton.isActive)
+        {
+            g.clear();
+            end = false;
+            player == 'X';
+            return;
+        }
+
+        int res = g.placePiece(mouseX, mouseY, player);
         switch (res)
         {
         case 0:
@@ -110,7 +123,16 @@ void update()
             endMessage.setMessage("Tie");
             break;
         }
-     
+
+        if (end == true)
+        {
+            clearButton.isActive = true;
+        }
+        else
+        {
+            clearButton.isActive = false;
+        }
+
         mouseDown = false;
     }
 }
@@ -129,6 +151,7 @@ void graphics()
     }
     if (end) {
         window.render(endMessage);
+        window.render(clearButton);
     }
 
     window.display();

@@ -30,6 +30,9 @@
     <ClCompile Include="src\Message.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Button.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Entity.h">
@@ -50,5 +53,22 @@
     <ClInclude Include="include\Message.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\Button.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\gfx\board.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\gfx\o.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\gfx\x.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="res\fonts\Roboto-Light.ttf" />
   </ItemGroup>
 </Project>
