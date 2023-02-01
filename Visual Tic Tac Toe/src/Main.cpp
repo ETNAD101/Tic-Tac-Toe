@@ -23,7 +23,7 @@ RenderWindow window(TITLE, WIDTH, HEIGHT);
 
 SDL_Event event;
 bool running = true;
-bool end = false;
+bool endGame = false;
 
 /**Creating Variables**/
 
@@ -85,17 +85,7 @@ void update()
     deltaTime = (double)((NOW - LAST) * 1000 / (double)SDL_GetPerformanceFrequency());
 
     if (mouseDown) {
-
         SDL_GetMouseState(&mouseX, &mouseY);
-
-        if (clearButton.pressed(mouseX, mouseY) && clearButton.isActive)
-        {
-            g.clear();
-            end = false;
-            player == 'X';
-            return;
-        }
-
         int res = g.placePiece(mouseX, mouseY, player);
         switch (res)
         {
@@ -107,30 +97,36 @@ void update()
                 player = 'X';
             }
             break;
-
         case 1:
-            end = true;
+            endGame = true;
             endMessage.setMessage("Player 1 has won");
             break;
 
         case 2:
-            end = true;
+            endGame = true;
             endMessage.setMessage("Player 2 has won");
             break;
 
         case 3:
-            end = true;
+            endGame = true;
             endMessage.setMessage("Tie");
             break;
         }
 
-        if (end == true)
+        if (endGame == true)
         {
             clearButton.isActive = true;
         }
         else
         {
             clearButton.isActive = false;
+        }
+
+        if (clearButton.pressed(mouseX, mouseY) && clearButton.isActive)
+        {
+            g.clear();
+            endGame = false;
+            player = 'X';
         }
 
         mouseDown = false;
@@ -149,7 +145,7 @@ void graphics()
     for (Entity p : pieces) {
         window.render(p);
     }
-    if (end) {
+    if (endGame) {
         window.render(endMessage);
         window.render(clearButton);
     }
